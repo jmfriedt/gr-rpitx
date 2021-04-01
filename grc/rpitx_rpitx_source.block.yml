@@ -1,0 +1,18 @@
+id: rpitx_rpitx_source
+label: rpitx source
+category: '[Rpitx]'
+templates:
+  imports: import rpitx
+  make: rpitx.rpitx_source(${samp_rate}, ${carrier_freq})
+parameters:
+- id: samp_rate
+  label: Samp_rate
+  dtype: float
+- id: carrier_freq
+  label: Carrier_freq
+  dtype: float
+inputs:
+- label: in
+  domain: stream
+  dtype: complex
+file_format: 1
