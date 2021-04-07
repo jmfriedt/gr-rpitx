@@ -4,6 +4,9 @@ Using the Raspberry Pi PLL as radiofrequency source controlled from GNU Radio.
 
 # Compiling
 
+We assumed ``librpitx`` to have been compiled and installed, most probably on
+the cross-compilation framework Buildroot as described at 
+
 See ``examples/README`` on the ``cmake`` command to run in the ``build_RP`` directory
 for compiling and linking gr-rpitx with Buildroot supporting GNU Radio (configuration
 files for RPi3 and RPi4 are for example found in the ``configs`` directory
@@ -30,3 +33,7 @@ resulting in the following measurements at fundamental frequency (left) and over
 <img src="examples/AM5kHz_fundamental.png">
 <img src="examples/AM5kHz_overtone5.png">
 
+Experimental setup: NEVER EVER radiate the RPiTX output on an antenna, only measure using a wired
+connection to the receiver:
+
+<img src="examples/DSC_0587ann_small.jpg">
