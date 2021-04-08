@@ -47,4 +47,4 @@ connection to the receiver:
 <img src="examples/DSC_0587ann_small.jpg">
 
 Movie demonstrating the use of gr-rpitx for emitting an FM signal received by
-a DVB-T dongle: https://github.com/jmfriedt/gr-rpitx/gr-rpitx_demo.mp4
+a DVB-T dongle: https://github.com/jmfriedt/gr-rpitx/tree/main/gr-rpitx_demo.mp4
