@@ -1,6 +1,7 @@
 id: rpitx_rpitx_source
 label: rpitx source
 category: '[Rpitx]'
+flags: throttle
 templates:
   imports: import rpitx
   make: rpitx.rpitx_source(${samp_rate}, ${carrier_freq})
@@ -8,11 +9,18 @@ parameters:
 - id: samp_rate
   label: Samp_rate
   dtype: float
+  default: samp_rate
 - id: carrier_freq
   label: Carrier_freq
   dtype: float
+  default: 86.6e6
 inputs:
 - label: in
   domain: stream
   dtype: complex
+documentation: |-
+  SampleRate 10000-250000 
+  Complex float input I,Q samples
+  Carrier frequency [Hz] in the 50 kHz to 1500 MHz range
+
 file_format: 1
