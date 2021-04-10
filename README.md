@@ -14,14 +14,41 @@ https://fosdem.org/2021/schedule/event/fsr_gnu_radio_on_embedded_using_buildroot
 See ``examples/README`` on the ``cmake`` command to run in the ``build_RP`` directory
 for compiling and linking gr-rpitx with Buildroot supporting GNU Radio (configuration
 files for RPi3 and RPi4 are for example found in the ``configs`` directory
-of https://github.com/oscimp/PlutoSDR). For the host PC to know about gr-rpitx source 
-when generating the flowgraph, the header files must be copied to an accessible directory 
-(most commonly ``/usr/include``) and the dynamic library also found on the host system 
-(even though gr-rpitx can of course not be executed on the PC). To avoid transfering a new
-SD card image to the RPi, we have selected to install the ARM binaries in a temporary directory
-on the host, e.g. ``/tmp/tempdir`` thanks to ``make install`` after completing ``make`` and
-then ``scp -r /tmp/tempdir IP_RPI:/usr`` since the tree structure in the installation
-directory matches the target tree structure starting from ``/usr``.
+of https://github.com/oscimp/PlutoSDR). 
+
+To summarize the content of ``examples/README``, assuming Buildoot is installed in
+``$BUILDROOT`` and the Raspberry Pi IP address is ``$IP_RPI``:
+
+```bash
+mkdir -p gr-rpitx/build_BR
+cd gr-rpitx/build_BR
+mkdir /tmp/tmpdir     # empty directory where compilation output will be stored
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/tmp/tmpdir -DCMAKE_TOOLCHAIN_FILE=$BUILDROOT/output/host/usr/share/buildroot/toolchainfile.cmake  -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
+make
+make install
+scp -r /tmp/tmpdir/* root@$IP_RPI:/usr
+```
+will install gr-rpitx to the Raspberry Pi
+
+For GNU Radio Companion on the host PC to be aware of the ``gr-rpitx`` sink block,
+this tool must also be compiled for the host:
+```bash
+mkdir -p gr-rpitx/build_PC
+cd gr-rpitx/build_PC
+cp -r $BUILDROOT/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
+make 
+sudo make install
+```
+
+meaning that for the host PC to know about gr-rpitx source when generating the flowgraph, 
+the header files must be copied to an accessible directory (most commonly ``/usr/include``) and 
+the dynamic library also found on the host system (even though gr-rpitx can of course not be 
+executed on the PC). To avoid transfering a new SD card image to the RPi, we have selected to 
+install the ARM binaries in a temporary directory on the host, e.g. ``/tmp/tempdir`` thanks to 
+``make install`` after completing ``make`` and then ``scp -r /tmp/tempdir $IP_RPI:/usr`` since 
+the tree structure in the installation directory matches the target tree structure starting 
+from ``/usr``.
 
 # Usage
 

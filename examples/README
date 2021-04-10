@@ -4,8 +4,10 @@ mkdir /tmp/tmpdir
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/tmp/tmpdir -DCMAKE_TOOLCHAIN_FILE=/t/buildroot-2020.11.1_RPi4/output/host/usr/share/buildroot/toolchainfile.cmake  -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
 make
 make install
-scp -r /tmp/tmpdir/* root@192.168.0.10:/
+scp -r /tmp/tmpdir/* root@192.168.0.10:/usr
 
 2/ Compiling on PC to create the GRC flowgraph:
+
+cp -r /t/buildroot-2020.11.1_RPi4/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
 
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
