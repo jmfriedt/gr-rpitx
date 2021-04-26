@@ -51,7 +51,7 @@ executed on the PC). To avoid transfering a new SD card image to the RPi, we hav
 install the ARM binaries in a temporary directory on the host, e.g. ``/tmp/tempdir`` thanks to 
 ``make install`` after completing ``make`` and then ``scp -r /tmp/tempdir $IP_RPI:/usr`` since 
 the tree structure in the installation directory matches the target tree structure starting 
-from ``/usr``.
+from ``/usr``. When using a GNU Radio installation generated with PyBOMBS, remove the ``-DCMAKE_INSTALL_PREFIX`` option when installing to the host since PyBOMS knows where to install the binaries it needs to access.
 
 # Usage
 
