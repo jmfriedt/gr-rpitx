@@ -34,11 +34,11 @@ scp -r /tmp/tmpdir/* root@$IP_RPI:/usr
 will install gr-rpitx to the Raspberry Pi
 
 For GNU Radio Companion on the host PC to be aware of the ``gr-rpitx`` sink block,
-this tool must also be compiled for the host:
+this tool must also be compiled for the host after installing ``librpitx`` on the host (``git clone https://github.com/F5OEO/librpitx/ && cd librpitx/src && LDFLAGS="-lm -lrt -lpthread" make && sudo cp librpitx.so /usr/lib``):
 ```bash
 mkdir -p gr-rpitx/build_PC
 cd gr-rpitx/build_PC
-cp -r $BUILDROOT/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
+sudo cp -r $BUILDROOT/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
 make 
 sudo make install
