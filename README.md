@@ -4,17 +4,20 @@ Using the Raspberry Pi PLL as radiofrequency source controlled from GNU Radio.
 
 # Compiling
 
-We assumed ``librpitx`` to have been compiled and installed, most probably on
-the cross-compilation framework Buildroot as described at https://github.com/oscimp/PlutoSDR/tree/for_next/package
-in for package directory of the for_next branch of the repository (tested with
-Buildroot 2020.11.1 and above). The benefits of using Buildroot for compiling GNU
+Easiest: gr-rpitx is available as a Buildroot BR2_EXTERNAL package at 
+https://github.com/oscimp/oscimp_br2_external and can be selected from 
+the ``External options``.
+
+We assume ``librpitx`` to have been compiled and installed, most probably on
+the cross-compilation framework Buildroot as described at https://github.com/oscimp/oscimp_br2_external 
+(tested with Buildroot 2020.11.1 and above). The benefits of using Buildroot for compiling GNU
 Radio to the Raspberry Pi single board computers are detailed at
 https://fosdem.org/2021/schedule/event/fsr_gnu_radio_on_embedded_using_buildroot/
 
 See ``examples/README`` on the ``cmake`` command to run in the ``build_RP`` directory
 for compiling and linking gr-rpitx with Buildroot supporting GNU Radio (configuration
 files for RPi3 and RPi4 are for example found in the ``configs`` directory
-of https://github.com/oscimp/PlutoSDR). 
+of https://github.com/oscimp/oscimp_br2_external). 
 
 To summarize the content of ``examples/README``, assuming Buildoot is installed in
 ``$BUILDROOT`` and the Raspberry Pi IP address is ``$IP_RPI``:
@@ -31,11 +34,11 @@ scp -r /tmp/tmpdir/* root@$IP_RPI:/usr
 will install gr-rpitx to the Raspberry Pi
 
 For GNU Radio Companion on the host PC to be aware of the ``gr-rpitx`` sink block,
-this tool must also be compiled for the host:
+this tool must also be compiled for the host after installing ``librpitx`` on the host (``git clone https://github.com/F5OEO/librpitx/ && cd librpitx/src && LDFLAGS="-lm -lrt -lpthread" make && sudo cp librpitx.so /usr/lib``):
 ```bash
 mkdir -p gr-rpitx/build_PC
 cd gr-rpitx/build_PC
-cp -r $BUILDROOT/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
+sudo cp -r $BUILDROOT/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
 make 
 sudo make install
@@ -48,7 +51,7 @@ executed on the PC). To avoid transfering a new SD card image to the RPi, we hav
 install the ARM binaries in a temporary directory on the host, e.g. ``/tmp/tempdir`` thanks to 
 ``make install`` after completing ``make`` and then ``scp -r /tmp/tempdir $IP_RPI:/usr`` since 
 the tree structure in the installation directory matches the target tree structure starting 
-from ``/usr``.
+from ``/usr``. When using a GNU Radio installation generated with PyBOMBS, remove the ``-DCMAKE_INSTALL_PREFIX`` option when installing to the host since PyBOMS knows where to install the binaries it needs to access.
 
 # Usage
 
