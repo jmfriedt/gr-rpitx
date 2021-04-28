@@ -81,8 +81,6 @@ namespace gr {
       const gr_complex *in = (const gr_complex *) input_items[0];
       int nbread=0,xferlen;
 
-      printf("noutput_items=%d\n",noutput_items);
-      // Do <+signal processing+>
       int CplxSampleNumber=0;
       while (nbread<noutput_items)
         {if (nbread+IQSize<noutput_items) xferlen=IQSize; else xferlen=noutput_items-nbread;
