@@ -48,7 +48,6 @@ namespace gr {
         (new rpitx_source_impl(samp_rate, carrier_freq));
     }
 
-
     /*
      * The private constructor
      */
@@ -59,6 +58,7 @@ namespace gr {
     {
 	iqtest=new iqdmasync(carrier_freq,samp_rate,14,IQSize*4,MODE_IQ); // 2 = typeiq_float in enum
 	iqtest->SetPLLMasterLoop(3,4,0);
+        samp_rate_=samp_rate;
     }
 
     /*
@@ -70,6 +70,14 @@ namespace gr {
      delete(iqtest);
     }
 
+    void rpitx_source_impl::set_freq(float freq)
+    { iqtest->stop();
+      delete(iqtest);
+      iqtest=new iqdmasync(freq,samp_rate_,14,IQSize*4,MODE_IQ); // 2 = typeiq_float in enum
+      iqtest->SetPLLMasterLoop(3,4,0);
+      printf("new frequency: %f\n",freq);
+    }
+ 
     int
     rpitx_source_impl::work(int noutput_items,
         gr_vector_const_void_star &input_items,

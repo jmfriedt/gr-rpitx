@@ -45,7 +45,8 @@ namespace gr {
        * class. rpitx::rpitx_source::make is the public interface for
        * creating new instances.
        */
-      static sptr make(float samp_rate, float carrier_freq);
+	static sptr make(float samp_rate, float carrier_freq);
+	virtual void set_freq(float)=0;      
     };
 
   } // namespace rpitx

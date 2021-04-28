@@ -31,11 +31,12 @@ namespace gr {
     {
      private:
       iqdmasync *iqtest;
-      // Nothing to declare in this block.
+      float samp_rate_;
 
      public:
       rpitx_source_impl(float samp_rate, float carrier_freq);
       ~rpitx_source_impl();
+      void set_freq(float);
 
       // Where all the action really happens
       int work(

@@ -5,6 +5,8 @@ flags: throttle
 templates:
   imports: import rpitx
   make: rpitx.rpitx_source(${samp_rate}, ${carrier_freq})
+  callbacks:
+  - set_freq(${carrier_freq})
 parameters:
 - id: samp_rate
   label: Samp_rate
