@@ -34,9 +34,9 @@ namespace gr {
       float samp_rate_;
 
      public:
+      void set_freq(float);
       rpitx_source_impl(float samp_rate, float carrier_freq);
       ~rpitx_source_impl();
-      void set_freq(float);
 
       // Where all the action really happens
       int work(

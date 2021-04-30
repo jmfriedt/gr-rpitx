@@ -31,6 +31,9 @@
 #include <cstring>
 #include <signal.h>
 #include <stdlib.h>
+#include <pthread.h>
+
+pthread_mutex_t th;
 
 bool  running=true;
 bool  fdds=false;            //operate as a DDS
@@ -56,26 +59,30 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(0, 0, 0))
     {
-	iqtest=new iqdmasync(carrier_freq,samp_rate,14,IQSize*4,MODE_IQ); // 2 = typeiq_float in enum
+	iqtest=new iqdmasync(carrier_freq,samp_rate,14,IQSize*4,MODE_IQ);
 	iqtest->SetPLLMasterLoop(3,4,0);
         samp_rate_=samp_rate;
+        pthread_mutex_init(&th, NULL);
+	printf("Welcome to gr-rpitx\n");
     }
 
     /*
      * Our virtual destructor.
      */
     rpitx_source_impl::~rpitx_source_impl()
-    {
-     iqtest->stop();
+    {iqtest->stop();
      delete(iqtest);
+     pthread_mutex_destroy(&th);
     }
 
     void rpitx_source_impl::set_freq(float freq)
-    { iqtest->stop();
+    { printf("new frequency: %f\n",freq);
+      pthread_mutex_lock(&th);
+      iqtest->stop();
       delete(iqtest);
-      iqtest=new iqdmasync(freq,samp_rate_,14,IQSize*4,MODE_IQ); // 2 = typeiq_float in enum
+      iqtest=new iqdmasync(freq,samp_rate_,14,IQSize*4,MODE_IQ);
       iqtest->SetPLLMasterLoop(3,4,0);
-      printf("new frequency: %f\n",freq);
+      pthread_mutex_unlock(&th);
     }
  
     int
@@ -92,7 +99,9 @@ namespace gr {
       int CplxSampleNumber=0;
       while (nbread<noutput_items)
         {if (nbread+IQSize<noutput_items) xferlen=IQSize; else xferlen=noutput_items-nbread;
+         pthread_mutex_lock(&th);
          iqtest->SetIQSamples((std::complex<float>*)&in[nbread],xferlen,Harmonic);
+         pthread_mutex_unlock(&th);
          nbread+=xferlen;
         }
       // Tell runtime system how many output items we produced.
