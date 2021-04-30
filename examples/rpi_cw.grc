@@ -27,11 +27,23 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 44.0]
+    coordinate: [192, 28.0]
     rotation: 0
     state: enabled
 
 blocks:
+- name: f
+  id: variable
+  parameters:
+    comment: ''
+    value: 86.6e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [240, 188.0]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
@@ -41,7 +53,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 44.0]
+    coordinate: [64, 28.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -66,23 +78,27 @@ blocks:
     coordinate: [24, 108.0]
     rotation: 0
     state: true
-- name: blocks_throttle_0
-  id: blocks_throttle
+- name: epy_module_0
+  id: epy_module
   parameters:
-    affinity: ''
     alias: ''
     comment: ''
-    ignoretag: 'True'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: samp_rate
-    type: complex
-    vlen: '1'
+    source_code: "# this module will be imported in the into your flowgraph\nimport\
+      \ socket\nimport string\nimport sys\n\ndef jmf_server(tt):\n\twhile True:\n\t\
+      \tsock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)\n\t\tsock.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)\n\
+      \t\tsock.bind(('192.168.1.168',4242))\n\t\tprint(\"Waiting for connection\"\
+      )\n\t\tsock.listen(1)\n\t\tconn,addr=sock.accept()\n\t\twith conn:\n\t\t\tprint(\"\
+      connected from: \",addr)\n\t\t\twhile True:\n\t\t\t\tdata=conn.recv(1)\n\t\t\
+      \t\tif data:\n\t\t\t\t\tdata=data.decode()\n\t\t\t\t\tprint(data)\n\t\t\t\t\t\
+      if '+' in data:\n\t\t\t\t\t\ttt.f=tt.f+1e4\n\t\t\t\t\tif '-' in data:\n\t\t\t\
+      \t\t\ttt.f=tt.f-1e4\n\t\t\t\t\ttt.set_f(tt.f)\n\t\t\t\t\tif 'q' in data:\n\t\
+      \t\t\t\t\tsock.shutdown(socket.SHUT_RDWR)\n\t\t\t\t\t\tsock.close()\n\t\t\t\t\
+      \t\tbreak\n"
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 148.0]
+    coordinate: [608, 28.0]
     rotation: 0
     state: true
 - name: rpitx_rpitx_source_0
@@ -90,7 +106,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    carrier_freq: (434e6/5)
+    carrier_freq: f
     comment: ''
     samp_rate: samp_rate
   states:
@@ -100,10 +116,28 @@ blocks:
     coordinate: [400, 140.0]
     rotation: 0
     state: true
+- name: snippet_0
+  id: snippet
+  parameters:
+    alias: ''
+    code: 'print("Starting server")
+
+      import threading
+
+      threading.Thread(target=epy_module_0.jmf_server,args=(self,)).start()'
+    comment: ''
+    priority: ''
+    section: main_after_init
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [376, 28.0]
+    rotation: 0
+    state: true
 
 connections:
-- [analog_sig_source_x_0, '0', blocks_throttle_0, '0']
-- [blocks_throttle_0, '0', rpitx_rpitx_source_0, '0']
+- [analog_sig_source_x_0, '0', rpitx_rpitx_source_0, '0']
 
 metadata:
   file_format: 1
