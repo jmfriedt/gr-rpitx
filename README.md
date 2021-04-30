@@ -55,11 +55,12 @@ from ``/usr``. When using a GNU Radio installation generated with PyBOMBS, remov
 
 # Usage
 
-SampleRate 10000-250000 
+SampleRate 10000-250000 (as given by the author of librpitx)
 
 Complex float input I,Q samples
 
-Carrier frequency [Hz] in the 50 kHz to 1500 MHz range
+Carrier frequency [Hz] in the 50 kHz to 1500 MHz range, dynamically tunable as 
+demonstrated at http://jmfriedt.free.fr/gr-rpitx_set_freq.mp4
 
 Application example: AM modulated signal using the following flowchart, generated from GNU Radio
 Companion on the host PC and executed with No GUI on the target Raspberry Pi 4:
@@ -90,5 +91,3 @@ message ``librpitx.so: cannot open shared object file: No such file or directory
 2. make sure GNU Radio is properly installed on the Raspberry Pi, as validated by running Python3 on the embedded board and ``import gnuradio`` should 
 not return any error message.
 3. make sure *no* file named ``rpitx.py`` or ``rpitx.pyc`` is in the current directory (as would be the case if the project Id in gnuradio-companion is ``rpitx``)
-
-
