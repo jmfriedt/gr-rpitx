@@ -2,7 +2,7 @@
 
 Using the Raspberry Pi PLL as radiofrequency source controlled from GNU Radio.
 
-# Compiling
+# Compiling for the Raspberry Pi target
 
 Easiest: gr-rpitx is available as a Buildroot BR2_EXTERNAL package at 
 https://github.com/oscimp/oscimp_br2_external and can be selected from 
@@ -33,6 +33,8 @@ scp -r /tmp/tmpdir/* root@$IP_RPI:/usr
 ```
 will install gr-rpitx to the Raspberry Pi
 
+# Compiling gr-rpitx on the host PC for GNU Radio Companion
+
 For GNU Radio Companion on the host PC to be aware of the ``gr-rpitx`` sink block,
 this tool must also be compiled for the host after installing ``librpitx`` on the host (``git clone https://github.com/F5OEO/librpitx/ && cd librpitx/src && LDFLAGS="-lm -lrt -lpthread" make && sudo cp librpitx.so /usr/lib``):
 ```bash
@@ -53,7 +55,7 @@ install the ARM binaries in a temporary directory on the host, e.g. ``/tmp/tempd
 the tree structure in the installation directory matches the target tree structure starting 
 from ``/usr``. When using a GNU Radio installation generated with PyBOMBS, remove the ``-DCMAKE_INSTALL_PREFIX`` option when installing to the host since PyBOMS knows where to install the binaries it needs to access.
 
-# Usage
+# Usage (on the target Raspberry Pi)
 
 SampleRate 10000-250000 (as given by the author of librpitx)
 
