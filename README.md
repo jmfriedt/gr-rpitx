@@ -35,6 +35,8 @@ will install gr-rpitx to the Raspberry Pi
 
 # Compiling gr-rpitx on the host PC for GNU Radio Companion
 
+*Prerequisites:* as with most cmake projects, ``doxygen``, but here additionnally make sure to have ``liborc`` development files (at the time of writing, ``liborc-0.4-dev``)
+
 For GNU Radio Companion on the host PC to be aware of the ``gr-rpitx`` sink block,
 this tool must also be compiled for the host after installing ``librpitx`` on the host (``git clone https://github.com/F5OEO/librpitx/ && cd librpitx/src && LDFLAGS="-lm -lrt -lpthread" make && sudo cp librpitx.so /usr/lib``):
 ```bash
