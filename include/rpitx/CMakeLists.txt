@@ -23,5 +23,5 @@
 ########################################################################
 install(FILES
     api.h
-    rpitx_source.h DESTINATION include/rpitx
+    rpitx_sink.h DESTINATION include/rpitx
 )

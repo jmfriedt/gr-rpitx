@@ -28,14 +28,14 @@ class rpi(gr.top_block):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 48000
+        self.samp_rate = samp_rate = 120000
 
         ##################################################
         # Blocks
         ##################################################
-        self.rpitx_rpitx_source_0 = rpitx.rpitx_source(samp_rate, (434e6/5))
+        self.rpitx_rpitx_sink_0 = rpitx.rpitx_sink(samp_rate, (86.6e6))
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 11000, .8, 0, 0)
+        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 10000, .8, 0, 0)
 
 
 
@@ -43,7 +43,7 @@ class rpi(gr.top_block):
         # Connections
         ##################################################
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_throttle_0, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.rpitx_rpitx_source_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.rpitx_rpitx_sink_0, 0))
 
 
     def get_samp_rate(self):

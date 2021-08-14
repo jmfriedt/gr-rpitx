@@ -82,8 +82,8 @@ blocks:
     coordinate: [16, 124.0]
     rotation: 0
     state: true
-- name: rpitx_rpitx_source_0
-  id: rpitx_rpitx_source
+- name: rpitx_rpitx_sink_0
+  id: rpitx_rpitx_sink
   parameters:
     affinity: ''
     alias: ''
@@ -99,7 +99,7 @@ blocks:
     state: true
 
 connections:
-- [analog_wfm_tx_0, '0', rpitx_rpitx_source_0, '0']
+- [analog_wfm_tx_0, '0', rpitx_rpitx_sink_0, '0']
 - [blocks_wavfile_source_0, '0', analog_wfm_tx_0, '0']
 
 metadata:

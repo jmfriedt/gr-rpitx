@@ -32,17 +32,17 @@ namespace gr {
      * \ingroup rpitx
      *
      */
-    class RPITX_API rpitx_source : virtual public gr::sync_block
+    class RPITX_API rpitx_sink : virtual public gr::sync_block
     {
      public:
-      typedef boost::shared_ptr<rpitx_source> sptr;
+      typedef boost::shared_ptr<rpitx_sink> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of rpitx::rpitx_source.
+       * \brief Return a shared_ptr to a new instance of rpitx::rpitx_sink.
        *
-       * To avoid accidental use of raw pointers, rpitx::rpitx_source's
+       * To avoid accidental use of raw pointers, rpitx::rpitx_sink's
        * constructor is in a private implementation
-       * class. rpitx::rpitx_source::make is the public interface for
+       * class. rpitx::rpitx_sink::make is the public interface for
        * creating new instances.
        */
 	static sptr make(float samp_rate, float carrier_freq);

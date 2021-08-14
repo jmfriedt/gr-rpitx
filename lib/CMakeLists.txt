@@ -24,7 +24,7 @@
 include(GrPlatform) #define LIB_SUFFIX
 
 list(APPEND rpitx_sources
-    rpitx_source_impl.cc
+    rpitx_sink_impl.cc
 )
 
 set(rpitx_sources "${rpitx_sources}" PARENT_SCOPE)

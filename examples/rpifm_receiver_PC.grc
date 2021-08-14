@@ -27,7 +27,7 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [240, 44.0]
+    coordinate: [240, 20.0]
     rotation: 0
     state: enabled
 
@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [408, 60.0]
+    coordinate: [408, 44.0]
     rotation: 0
     state: enabled
 - name: analog_wfm_rcv_0
@@ -536,7 +536,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [560, 104.0]
+    coordinate: [560, 96.0]
     rotation: 0
     state: true
 - name: qtgui_freq_sink_x_0_0
@@ -616,7 +616,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 224.0]
+    coordinate: [816, 280.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -713,7 +713,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [816, 140.0]
+    coordinate: [816, 164.0]
     rotation: 0
     state: true
 

@@ -19,5 +19,5 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    rpitx_rpitx_source.block.yml DESTINATION share/gnuradio/grc/blocks
+    rpitx_rpitx_sink.block.yml DESTINATION share/gnuradio/grc/blocks
 )

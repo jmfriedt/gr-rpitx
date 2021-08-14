@@ -33,7 +33,7 @@ class rpi_am(gr.top_block):
         ##################################################
         # Blocks
         ##################################################
-        self.rpitx_rpitx_source_0 = rpitx.rpitx_source(samp_rate, 86.6e6)
+        self.rpitx_rpitx_sink_0 = rpitx.rpitx_sink(samp_rate, 86.6e6)
         self.blocks_magphase_to_complex_0 = blocks.magphase_to_complex(1)
         self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, 5000, 1, 0, 0)
         self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 0)
@@ -45,7 +45,7 @@ class rpi_am(gr.top_block):
         ##################################################
         self.connect((self.analog_const_source_x_0, 0), (self.blocks_magphase_to_complex_0, 1))
         self.connect((self.analog_sig_source_x_0, 0), (self.blocks_magphase_to_complex_0, 0))
-        self.connect((self.blocks_magphase_to_complex_0, 0), (self.rpitx_rpitx_source_0, 0))
+        self.connect((self.blocks_magphase_to_complex_0, 0), (self.rpitx_rpitx_sink_0, 0))
 
 
     def get_samp_rate(self):

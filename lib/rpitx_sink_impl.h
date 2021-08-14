@@ -21,13 +21,13 @@
 #ifndef INCLUDED_RPITX_RPITX_SOURCE_IMPL_H
 #define INCLUDED_RPITX_RPITX_SOURCE_IMPL_H
 
-#include <rpitx/rpitx_source.h>
+#include <rpitx/rpitx_sink.h>
 #include <librpitx/iqdmasync.h>
 
 namespace gr {
   namespace rpitx {
 
-    class rpitx_source_impl : public rpitx_source
+    class rpitx_sink_impl : public rpitx_sink
     {
      private:
       iqdmasync *iqtest;
@@ -35,8 +35,8 @@ namespace gr {
 
      public:
       void set_freq(float);
-      rpitx_source_impl(float samp_rate, float carrier_freq);
-      ~rpitx_source_impl();
+      rpitx_sink_impl(float samp_rate, float carrier_freq);
+      ~rpitx_sink_impl();
 
       // Where all the action really happens
       int work(

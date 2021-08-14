@@ -27,7 +27,7 @@ options:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [352, 12.0]
+    coordinate: [328, 12.0]
     rotation: 0
     state: enabled
 
@@ -41,7 +41,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [256, 12.0]
+    coordinate: [232, 12.0]
     rotation: 0
     state: enabled
 - name: analog_const_source_x_0
@@ -58,7 +58,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [80, 140.0]
+    coordinate: [16, 172.0]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -68,7 +68,7 @@ blocks:
     alias: ''
     amp: '1'
     comment: ''
-    freq: '51000'
+    freq: '5000'
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -80,7 +80,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 12.0]
+    coordinate: [16, 28.0]
     rotation: 0
     state: true
 - name: blocks_magphase_to_complex_0
@@ -96,11 +96,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [288, 112.0]
+    coordinate: [296, 128.0]
     rotation: 0
     state: true
-- name: rpitx_rpitx_source_0
-  id: rpitx_rpitx_source
+- name: rpitx_rpitx_sink_0
+  id: rpitx_rpitx_sink
   parameters:
     affinity: ''
     alias: ''
@@ -111,14 +111,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [576, 116.0]
+    coordinate: [576, 124.0]
     rotation: 0
     state: true
 
 connections:
 - [analog_const_source_x_0, '0', blocks_magphase_to_complex_0, '1']
 - [analog_sig_source_x_0, '0', blocks_magphase_to_complex_0, '0']
-- [blocks_magphase_to_complex_0, '0', rpitx_rpitx_source_0, '0']
+- [blocks_magphase_to_complex_0, '0', rpitx_rpitx_sink_0, '0']
 
 metadata:
   file_format: 1

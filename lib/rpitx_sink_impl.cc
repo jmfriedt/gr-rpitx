@@ -23,7 +23,7 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "rpitx_source_impl.h"
+#include "rpitx_sink_impl.h"
 
 #include <unistd.h>
 #include <librpitx/librpitx.h>
@@ -44,18 +44,18 @@ float drivedds=0.1;          //drive level
 namespace gr {
   namespace rpitx {
 
-    rpitx_source::sptr
-    rpitx_source::make(float samp_rate, float carrier_freq)
+    rpitx_sink::sptr
+    rpitx_sink::make(float samp_rate, float carrier_freq)
     {
       return gnuradio::get_initial_sptr
-        (new rpitx_source_impl(samp_rate, carrier_freq));
+        (new rpitx_sink_impl(samp_rate, carrier_freq));
     }
 
     /*
      * The private constructor
      */
-    rpitx_source_impl::rpitx_source_impl(float samp_rate, float carrier_freq)
-      : gr::sync_block("rpitx_source",
+    rpitx_sink_impl::rpitx_sink_impl(float samp_rate, float carrier_freq)
+      : gr::sync_block("rpitx_sink",
               gr::io_signature::make(1, 1, sizeof(gr_complex)),
               gr::io_signature::make(0, 0, 0))
     {
@@ -69,13 +69,13 @@ namespace gr {
     /*
      * Our virtual destructor.
      */
-    rpitx_source_impl::~rpitx_source_impl()
+    rpitx_sink_impl::~rpitx_sink_impl()
     {iqtest->stop();
      delete(iqtest);
      pthread_mutex_destroy(&th);
     }
 
-    void rpitx_source_impl::set_freq(float freq)
+    void rpitx_sink_impl::set_freq(float freq)
     { printf("new frequency: %f\n",freq);
       pthread_mutex_lock(&th);
       iqtest->stop();
@@ -86,7 +86,7 @@ namespace gr {
     }
  
     int
-    rpitx_source_impl::work(int noutput_items,
+    rpitx_sink_impl::work(int noutput_items,
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {

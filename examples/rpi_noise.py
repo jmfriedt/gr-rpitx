@@ -20,7 +20,7 @@ import epy_module_0  # embedded python module
 import rpitx
 
 
-class rpi(gr.top_block):
+class rpi_noise(gr.top_block):
 
     def __init__(self):
         gr.top_block.__init__(self, "Not titled yet")
@@ -28,21 +28,21 @@ class rpi(gr.top_block):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 248000
+        self.samp_rate = samp_rate = 200000
         self.f = f = 86.6e6
 
         ##################################################
         # Blocks
         ##################################################
-        self.rpitx_rpitx_sink0 = rpitx.rpitx_sink(samp_rate, f)
-        self.analog_sig_source_x_0 = analog.sig_source_c(samp_rate, analog.GR_COS_WAVE, 11000, .8, 0, 0)
+        self.rpitx_rpitx_sink_0 = rpitx.rpitx_sink(samp_rate, f)
+        self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, 1, 0)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_sig_source_x_0, 0), (self.rpitx_rpitx_sink_0, 0))
+        self.connect((self.analog_noise_source_x_0, 0), (self.rpitx_rpitx_sink_0, 0))
 
 
     def get_samp_rate(self):
@@ -50,7 +50,6 @@ class rpi(gr.top_block):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
 
     def get_f(self):
         return self.f
@@ -71,7 +70,7 @@ def snippets_main_after_init(tb):
 
 
 
-def main(top_block_cls=rpi, options=None):
+def main(top_block_cls=rpi_noise, options=None):
     tb = top_block_cls()
     snippets_main_after_init(tb)
     def sig_handler(sig=None, frame=None):
