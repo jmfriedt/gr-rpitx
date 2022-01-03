@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2021 JMF.
+ * Copyright 2022 JMF.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_RPITX_RPITX_SOURCE_H
-#define INCLUDED_RPITX_RPITX_SOURCE_H
+#ifndef INCLUDED_RPITX_RPITX_SINK_H
+#define INCLUDED_RPITX_RPITX_SINK_H
 
 #include <rpitx/api.h>
 #include <gnuradio/sync_block.h>
@@ -35,7 +35,7 @@ namespace gr {
     class RPITX_API rpitx_sink : virtual public gr::sync_block
     {
      public:
-      typedef boost::shared_ptr<rpitx_sink> sptr;
+      typedef std::shared_ptr<rpitx_sink> sptr;
 
       /*!
        * \brief Return a shared_ptr to a new instance of rpitx::rpitx_sink.

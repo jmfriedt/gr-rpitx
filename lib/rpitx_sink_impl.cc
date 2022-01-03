@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2021 JMF.
+ * Copyright 2022 JMF.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,8 @@
 #include "config.h"
 #endif
 
-#include <gnuradio/io_signature.h>
 #include "rpitx_sink_impl.h"
+#include <gnuradio/io_signature.h>
 
 #include <unistd.h>
 #include <librpitx/librpitx.h>
@@ -33,23 +33,21 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-pthread_mutex_t th;
+namespace gr {
+  namespace rpitx {
 
+using input_type = gr_complex;
+rpitx_sink::sptr rpitx_sink::make(float samp_rate, float carrier_freq)
+{
+    return gnuradio::make_block_sptr<rpitx_sink_impl>(samp_rate, carrier_freq);
+}
+
+pthread_mutex_t th;
 bool  running=true;
 bool  fdds=false;            //operate as a DDS
 float drivedds=0.1;          //drive level
 
 #define IQSize 4096
-
-namespace gr {
-  namespace rpitx {
-
-    rpitx_sink::sptr
-    rpitx_sink::make(float samp_rate, float carrier_freq)
-    {
-      return gnuradio::get_initial_sptr
-        (new rpitx_sink_impl(samp_rate, carrier_freq));
-    }
 
     /*
      * The private constructor

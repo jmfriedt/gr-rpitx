@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2021 JMF.
+ * Copyright 2022 JMF.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_RPITX_RPITX_SOURCE_IMPL_H
-#define INCLUDED_RPITX_RPITX_SOURCE_IMPL_H
+#ifndef INCLUDED_RPITX_RPITX_SINK_IMPL_H
+#define INCLUDED_RPITX_RPITX_SINK_IMPL_H
 
 #include <rpitx/rpitx_sink.h>
 #include <librpitx/iqdmasync.h>
@@ -49,5 +49,4 @@ namespace gr {
   } // namespace rpitx
 } // namespace gr
 
-#endif /* INCLUDED_RPITX_RPITX_SOURCE_IMPL_H */
-
+#endif /* INCLUDED_RPITX_RPITX_SINK_IMPL_H */
