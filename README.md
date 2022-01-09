@@ -4,9 +4,10 @@ Using the Raspberry Pi PLL as radiofrequency source controlled from GNU Radio.
 
 # Compiling for the Raspberry Pi target
 
-Easiest: gr-rpitx is available as a Buildroot BR2_EXTERNAL package at 
+Easiest: gr-rpitx for GNU Radio 3.8 is available as a Buildroot BR2_EXTERNAL package at 
 https://github.com/oscimp/oscimp_br2_external and can be selected from 
-the ``External options``.
+the ``External options``. For GNU Radio 3.9, switch from ``master`` to ``gr39`` branch
+and compile manually as described below, assuming librpitx has been compiled with Buildroot.
 
 We assume ``librpitx`` to have been compiled and installed, most probably on
 the cross-compilation framework Buildroot as described at https://github.com/oscimp/oscimp_br2_external 
