@@ -42,7 +42,17 @@ Buildroot is compiling for the target).
 *Prerequisites:* as with most cmake projects, ``doxygen``, but here additionnally make sure to have ``liborc`` development files (at the time of writing, ``liborc-0.4-dev``)
 
 For GNU Radio Companion on the host PC to be aware of the ``gr-rpitx`` sink block,
-this tool must also be compiled for the host after installing ``librpitx`` on the host (``git clone https://github.com/F5OEO/librpitx/ && cd librpitx/src && LDFLAGS="-lm -lrt -lpthread" make && sudo cp librpitx.so /usr/lib``):
+this tool must also be compiled for the host after installing ``librpitx`` on the host 
+```
+git clone https://github.com/F5OEO/librpitx/
+cd librpitx/src
+LDFLAGS="-lm -lrt -lpthread" make
+sudo make install
+sudo cp librpitx.so /usr/lib
+```
+
+with the ``LDFLAGS=... make`` used to remove the linking step on the Raspberry Pi binary library when compiling on the host PC. Once ``librpitx`` is successfully installed on the host, we can compile ``gr-rpitx`` with
+
 ```bash
 mkdir -p gr-rpitx/build_PC
 cd gr-rpitx/build_PC
