@@ -32,7 +32,10 @@ make
 make install
 scp -r /tmp/tmpdir/* root@$IP_RPI:/usr
 ```
-will install gr-rpitx to the Raspberry Pi
+will install gr-rpitx to the Raspberry Pi. Do *not* run this command in a PyBOMBS which will
+override the CMAKE_INSTALL_PREFIX settings and always install the resulting binary in the 
+PyBOMBS directory (which does not make sense since PyBOMBS is for the host architecture whereas 
+Buildroot is compiling for the target).
 
 # Compiling gr-rpitx on the host PC for GNU Radio Companion
 
