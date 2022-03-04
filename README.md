@@ -54,6 +54,7 @@ sudo cp librpitx.so /usr/local/lib
 with the ``LDFLAGS=... make`` used to remove the linking step on the Raspberry Pi binary library when compiling on the host PC. Once ``librpitx`` is successfully installed on the host, we can compile ``gr-rpitx`` with
 
 ```bash
+git clone https://github.com/jmfriedt/gr-rpitx/
 mkdir -p gr-rpitx/build_PC
 cd gr-rpitx/build_PC
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
