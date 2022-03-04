@@ -48,7 +48,7 @@ git clone https://github.com/F5OEO/librpitx/
 cd librpitx/src
 LDFLAGS="-lm -lrt -lpthread" make
 sudo make install
-sudo cp librpitx.so /usr/lib
+sudo cp librpitx.so /usr/local/lib
 ```
 
 with the ``LDFLAGS=... make`` used to remove the linking step on the Raspberry Pi binary library when compiling on the host PC. Once ``librpitx`` is successfully installed on the host, we can compile ``gr-rpitx`` with
@@ -56,7 +56,6 @@ with the ``LDFLAGS=... make`` used to remove the linking step on the Raspberry P
 ```bash
 mkdir -p gr-rpitx/build_PC
 cd gr-rpitx/build_PC
-sudo cp -r $BUILDROOT/output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/librpitx /usr/include/
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON ../
 make 
 sudo make install
